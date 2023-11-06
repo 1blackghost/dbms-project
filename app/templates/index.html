@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Donation App</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+    @import url("/static/style.css");
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img class="logo" src="/static/logo.png" alt="Blood Donation App Logo">
+            <nav class="menu">
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="login-input">
+            <div>
+                    <div>
+                    <button type="button" id="back-to-main-button1" class="form-button" style="background-color: blue; color: white;text-align: center;">Back to Main Menu</button>
+                    <div id="results" class="login-container2">
+                    </div>
+                    </div>
+            </div>
+            <div class="login-container">
+
+                <h2 id="head">Register as a Blood Donor</h2>
+                <div class="login-form">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth (mm/dd/yyyy):</label>
+                        <input type="text" id="dob" name="dob" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="aadhaar">Aadhaar Number:</label>
+                        <input type="text" id="aadhaar" name="aadhaar" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="nationality">Nationality:</label>
+                        <input type="text" id="nationality" name="nationality" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State:</label>
+                        <input type="text" id="state" name="state" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address:</label>
+                        <input type="text" id="address" name="address" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="bloodType">Blood Type:</label>
+                        <input type="text" id="bloodType" name="bloodType" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactPhone">Contact Phone:</label>
+                        <input type="text" id="contactPhone" name="contactPhone" class="form-input">
+                    </div>
+                    <button type="submit" id="search-button" class="form-button">Search</button>
+
+                    <button type="submit" id="submit-button" class="form-button">Submit</button>
+                    <button type="button" id="back-to-main-button" class="form-button" style="background-color: blue; color: white;">Back to Main Menu</button>
+
+                </div>
+                <div class="error-section" style="color: red;"></div>
+            </div>
+        </section>
+
+        <div class="hero-section">
+            <h1>Welcome to the Blood Donation App</h1>
+            <p>Join our community of blood donors and save lives. Register as a blood donor today.</p>
+            <a class="cta-button" id="register-but" >Register as a Donor</a>
+            <a class="cta-button" id="view-donors-but" >View Donors</a>
+        </div>
+
+        <section class="features-section" id="features">
+            <h2>Key Features</h2>
+            <div class="feature">
+                <span class="feature-icon">❤️</span>
+                <h3 class="feature-title">Donate Blood</h3>
+                <p class="feature-description">Become a blood donor and help save lives by donating blood to those in need.</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🩸</span>
+                <h3 class="feature-title">Find Donors</h3>
+                <p class="feature-description">Search for blood donors in your area and connect with them when needed.</p>
+            </div>
+            <div class="feature">
+                <span class="feature-icon">📅</span>
+                <h3 class="feature-title">Schedule Donations</h3>
+                <p class="feature-description">Schedule your blood donation appointments at convenient times.</p>
+
+            </div>
+            <div class="feature">
+                <span class="feature-icon">🌟</span>
+                <h3 class="feature-title">Blood Donation Reminders</h3>
+                <p class="feature-description">Never miss an opportunity to donate blood. Receive timely reminders and notifications..</p>
+            </div>
+
+
+        </section>
+
+        <section class="about-section" id="about">
+            <h2>About the Blood Donation App</h2>
+            <p>The Blood Donation App is a platform that connects blood donors with individuals and organizations in need of blood. By registering as a blood donor, you can make a difference in the lives of those who require blood transfusions. Join us in the mission to save lives and improve healthcare outcomes.</p>
+        </section>
+
+        <section class="contact-section" id="contact">
+            <h2>Contact Us</h2>
+            <p>If you have any questions or need assistance, please reach out to our support team.</p>
+            <p>Email: info@blooddonationapp.com</p>
+            <p>Phone: 123-456-7890</p>
+        </section>
+
+        <footer class="footer">
+            &copy; 2023 Blood Donation App. All rights reserved.
+        </footer>
+    </div>
+</body>
+<script>
+   function displaySearchResults(results) {
+    // Get the "results" div element by its ID
+    var resultsDiv = document.getElementById("results");
+
+    // Clear the contents of the results div
+    resultsDiv.innerHTML = "";
+
+    // Check if any results were found
+    if (results.length === 0) {
+        resultsDiv.innerHTML = "<p>No results found!</p>";
+        return;
+    }
+
+    // Create a container for displaying each result
+    var resultContainer = document.createElement("div");
+    resultContainer.className = "search-result-container";
+
+
+    // Append the "Back to Main Menu" button to the results div
+
+    // Loop through the search results and create elements to display them
+    results.forEach(function (result) {
+        // Create a div to hold the information for each result
+        var resultItem = document.createElement("div");
+        resultItem.className = "search-result-item";
+
+        // Loop through the properties of the result and create elements to display them
+        for (var key in result) {
+            if (result.hasOwnProperty(key)) {
+                var propertyElement = document.createElement("p");
+                propertyElement.innerHTML = "<strong>" + key + ":</strong> " + result[key];
+                resultItem.appendChild(propertyElement);
+            }
+        }
+
+        // Create the "Contact" button
+        var contactButton = document.createElement("button");
+        contactButton.className = "contact-button";
+        contactButton.innerHTML = "<i class='fa fa-phone'></i> Contact";
+        contactButton.onclick = function () {
+            // Handle contact button click event here
+            alert("Contact " + result.name);
+        };
+
+        // Append the "Contact" button to the result item
+        resultItem.appendChild(contactButton);
+
+        // Append the result item to the result container
+        resultContainer.appendChild(resultItem);
+    });
+
+    // Append the "Back to Main Menu" button
+ 
+
+    // Append the result container to the results div
+    resultsDiv.appendChild(resultContainer);
+}
+
+
+
+    $(document).ready(function() {
+        $(".login-input").hide();
+        $("#back-to-main-button").hide();
+        $("#back-to-main-button").hide();
+        $("#search-button").hide();
+
+        $("#register-but").click(function() {
+            $(".hero-section").hide();
+            $(".login-input").fadeIn(1000);
+        });
+
+        $("#back-to-main-button").click(function() {
+            $(".login-container").show();
+            $(".login-input").hide();
+            $(".hero-section").fadeIn(1000);
+        });
+        $("#back-to-main-button1").click(function() {
+            $(".login-container").show();
+            $(".login-input").hide();
+            $(".hero-section").fadeIn(1000);
+        });
+        $("#view-donors-but").click(function() {
+            $('.error-section').hide();
+
+             $(".login-input").hide();
+        $("#back-to-main-button").hide();
+        $("#back-to-main-button").hide();
+        $("#search-button").hide();
+            $("#submit-button").hide();
+            $("#search-button").fadeIn(1000);
+
+            $("#head").text("Search");
+            $(".hero-section").hide();
+
+            $(".login-input").fadeIn(1000);
+        });
+    });
+    $("#search-button").click(function() {
+        var name = $('#name').val();
+        var dob = $('#dob').val();
+        var aadhaar = $('#aadhaar').val();
+        var nationality = $('#nationality').val();
+        var state = $('#state').val();
+        var address = $('#address').val();
+        var bloodType = $('#bloodType').val();
+        var contactPhone = $('#contactPhone').val();
+
+        var data = {
+            name: name,
+            dob: dob,
+            aadhaar: aadhaar,
+            nationality: nationality,
+            state: state,
+            address: address,
+            bloodType: bloodType,
+            contactPhone: contactPhone
+        };
+
+        $.ajax({
+            url: '/search',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function(response) {
+                console.log(response);
+                if (response.message === "ok") {
+                    $(".error-section").css("color", "green");
+
+                     $('.error-section').text(response.m);
+                     $("#submit-button").hide();
+                     $(".login-container").hide();
+                     $("#back-to-main-button").fadeIn(1000);
+                    displaySearchResults(response.results);
+
+                }
+            },
+            error: function(error) {
+                $('.error-section').text('Error: ' + error.responseJSON.message);
+            }
+        });
+    });
+    $("#submit-button").click(function() {
+        var name = $('#name').val();
+        var dob = $('#dob').val();
+        var aadhaar = $('#aadhaar').val();
+        var nationality = $('#nationality').val();
+        var state = $('#state').val();
+        var address = $('#address').val();
+        var bloodType = $('#bloodType').val();
+        var contactPhone = $('#contactPhone').val();
+
+        var data = {
+            name: name,
+            dob: dob,
+            aadhaar: aadhaar,
+            nationality: nationality,
+            state: state,
+            address: address,
+            bloodType: bloodType,
+            contactPhone: contactPhone
+        };
+
+        $.ajax({
+            url: '/register',
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: function(response) {
+                console.log(response);
+                if (response.message === "ok") {
+                    $(".error-section").css("color", "green");
+
+                     $('.error-section').text(response.m);
+                     $("#submit-button").hide();
+                     $("#back-to-main-button").fadeIn(1000);
+                }
+            },
+            error: function(error) {
+                $('.error-section').text('Error: ' + error.responseJSON.message);
+            }
+        });
+    });
+</script>
+</html>
